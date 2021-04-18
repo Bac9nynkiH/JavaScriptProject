@@ -1,6 +1,4 @@
-/**
- * Created by chaika on 09.02.16.
- */
+
 var express = require('express');
 var path = require('path');
 var morgan = require('morgan');
@@ -8,11 +6,12 @@ var bodyParser = require('body-parser');
 
 function configureEndpoints(app) {
     var pages = require('./pages');
+    var api=require('./api')
  
 
     //Налаштування URL за якими буде відповідати сервер
     //Отримання списку піц
-   
+    app.get('/api/get-box-list/', api.getBoxList);
 
     //Сторінки
     //Головна сторінка
