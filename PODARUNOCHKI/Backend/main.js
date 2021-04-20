@@ -3,12 +3,15 @@ var express = require('express');
 var path = require('path');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var fs=require('fs');
+var ejs=require('ejs');
 
 function configureEndpoints(app) {
     var pages = require('./pages');
     var api=require('./api')
- 
 
+
+   
     //Налаштування URL за якими буде відповідати сервер
     //Отримання списку піц
     app.get('/api/get-box-list/', api.getBoxList);
@@ -17,11 +20,10 @@ function configureEndpoints(app) {
     //Головна сторінка
     app.get('/', pages.mainPage);
 
-    //Сторінка замовлення
-    app.get('/order.html', pages.orderPage);
+
 
     //Якщо не підійшов жоден url, тоді повертаємо файли з папки www
-    app.use(express.static(path.join(__dirname, '../Frontend')));
+    app.use(express.static(path.join(__dirname, '../Frontend/www')));
 }
 
 function startServer(port) {
@@ -46,5 +48,9 @@ function startServer(port) {
         console.log('My Application Running on http://localhost:' + port + '/');
     });
 }
+
+
+
+
 
 exports.startServer = startServer;
