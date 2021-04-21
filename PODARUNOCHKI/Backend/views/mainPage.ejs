@@ -11,6 +11,7 @@
 <% include common/cart.ejs %>
 <body>
   <img id='cartIcon' src="assests/images/cart.png">
+  <span id='countBougthItemsCircle'><p id="countBougthItems"></p></span>
   <header class="headerMarketingUa">
     <div class="headerBody">
         <img class="logoImage" src="assests/images/logo.jpeg">
@@ -57,8 +58,16 @@
       </table>
       
     </section>
-    <section class="completeBox">
-      <h2>ГОТОВІ ПОДАРУНКИ</h2>
+     <section class="completeBox" id="completeScroll">
+      <h2 id="readyGifts">ГОТОВІ ПОДАРУНКИ</h2>
+            <div class="typeOfPresents" id="typesForScroll">
+              <button data-href="#Easter" class="type" id="1">ПАСХА</button>
+              <button data-href="#Him" class="type" id="2">ДЛЯ НЬОГО</button>
+              <button data-href="#Her" class="type" id="3">ДЛЯ НЕЇ</button>
+              <button data-href="#Sweeties" class="type" id="4">СМАКОЛИКИ</button>
+              <button data-href="#NewYear" class="type" id="5">НОВИЙ РІК</button>
+              <button data-href="#SaintValentine" class="type" id="6">14.02</button>
+           </div>
     </section>
 
     <div class="boxSections">
@@ -68,10 +77,10 @@
           <p class="byHoliday">До Пасхи</p>
           <div class="row holiday" id='Easter'>
             
-              <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="assests/images/box13east.JPG" ><div class="caption"> <p class="textName">Весняний комплімент</p> <p class="description">з ароматним чаєм і смаколиками</p> <p class="price">195 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
+              <!-- <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="assests/images/box13east.JPG" ><div class="caption"> <p class="textName">Весняний комплімент</p> <p class="description">з ароматним чаєм і смаколиками</p> <p class="price">195 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
               <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="assests/images/box15east.JPG" ><div class="caption"> <p class="textName">Ніжні барви</p> <p class="description">з тематичними деталями і смаколиками</p> <p class="price">175 грн</p></div><div class="BuyAndDetailsButtons">  <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
               <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="assests/images/box8east.JPG" ><div class="caption"><p class="textName">Весняний пакунок</p> <p class="description">чай, тематичні пряники, смаколики</p> <p class="price">225 грн</p></div> <div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
-            
+             -->
           </div>
           
                
@@ -79,10 +88,10 @@
         <p class="byHoliday">Для нього</p>
         <div class="row holiday" id='Him'>
           
-            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/men.JPG" ><div class="caption"> <p class="textName">Набір для догляду</p> <p class="description">шампунь, гель для душу, крем для рук, бальзам після гоління, листівка</p> <p class="price">359 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
+            <!-- <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/men.JPG" ><div class="caption"> <p class="textName">Набір для догляду</p> <p class="description">шампунь, гель для душу, крем для рук, бальзам після гоління, листівка</p> <p class="price">359 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
             <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/formen.JPG" ><div class="caption"> <p class="textName">Приємні дрібниці</p> <p class="description">смачний фруктовий чай та кава, фляжка та смаколики</p> <p class="price">310 грн</p></div><div class="BuyAndDetailsButtons">    <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/forhim.JPG" > <div class="caption">  <p class="textName">Елегантний</p> <p class="description">блокнот, смачний чай, цукерки, шоколад, горішки</p> <p class="price">265 грн</p></div><div class="BuyAndDetailsButtons">  <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
-          
+           -->
         </div>
 
 
@@ -90,10 +99,10 @@
         <p class="byHoliday">Для неї</p>
           <div class="row holiday" id="Her">
           
-              <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box188march.JPG" ><div class="caption"> <p class="textName">Ідеально до 8 березня</p> <p class="description">листівка, пряник в вигляді вісьмірки, чашка та солоденьке</p> <p class="price">279 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
+              <!-- <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box188march.JPG" ><div class="caption"> <p class="textName">Ідеально до 8 березня</p> <p class="description">листівка, пряник в вигляді вісьмірки, чашка та солоденьке</p> <p class="price">279 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
               <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/forHer.JPG" ><div class="caption"><p class="textName">Рожеві приємності</p> <p class="description">зефір, шоколад, джем, цукерки, антисептик з ароматом троянди</p> <p class="price"> 339 грн</p></div> <div class="BuyAndDetailsButtons">  <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
               <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box5.JPG" ><div class="caption">   <p class="textName">Квітковий бокс</p> <p class="description">сіль для ванни, кокосове масло для тіла, букетик, листівка і солоденьке</p> <p class="price"> 229 грн</p></div><div class="BuyAndDetailsButtons">  <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
-            
+             -->
           </div>
         
 
@@ -101,10 +110,10 @@
        <p class="byHoliday">Смаколики</p>
        <div class="row holiday" id="Sweeties">
          
-           <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box16.JPG" ><div class="caption"><p class="textName">Бадьорий пакунок</p> <p class="description">кава, апельсиновий мармелад, склянка, горішки </p> <p class="price"> 275 грн</p></div><div class="BuyAndDetailsButtons">  <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
+           <!-- <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box16.JPG" ><div class="caption"><p class="textName">Бадьорий пакунок</p> <p class="description">кава, апельсиновий мармелад, склянка, горішки </p> <p class="price"> 275 грн</p></div><div class="BuyAndDetailsButtons">  <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box14.JPG" > <div class="caption"><p class="textName">Для затишного вечора</p> <p class="description">какао, ванільний зефір, імбирне печиво, ніжні деталі</p> <p class="price"> 140 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box11.JPG" ><div class="caption">  <p class="textName">Цінувачам кави</p> <p class="description">заварник для кави, чашка з блюдечком, кава, шоколадні цукерки</p> <p class="price"> 390 грн</p></div><div class="BuyAndDetailsButtons"><button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
-         
+          -->
        </div>
 
 
@@ -112,11 +121,11 @@
        <p class="byHoliday">До нового року</p>
        <div class="row holiday" id="NewYear">
          
-           <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/newYear.JPG" ><div class="caption"><p class="textName">Набір для глінтвейну</p> <p class="description">Спеції для глінтвейну, червоне сухе вино, класична склянка , смаколики, листівка</p> <p class="price">695 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
+           <!-- <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/newYear.JPG" ><div class="caption"><p class="textName">Набір для глінтвейну</p> <p class="description">Спеції для глінтвейну, червоне сухе вино, класична склянка , смаколики, листівка</p> <p class="price">695 грн</p></div><div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box10newyear.JPG" ><div class="caption"> <p class="textName">Затишний подарунок</p> <p class="description">Шкарпетки, пряник Дід Мороз, упаковка какао, солодощі, дерев'яна ялинка</p> <p class="price">240 грн</p></div><div class="BuyAndDetailsButtons">   <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box12.JPG" ><div class="caption">  <p class="textName">Новорічні солодощі</p> <p class="description">Баночки з трьома видами джему, цукерки, шоколад, пряники-зірочки</p> <p class="price">329 грн</p></div><div class="BuyAndDetailsButtons">   <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div>
         
-       </div>
+       </div> -->
 
 
        <p class="byHoliday">До дня всіх закоханих</p>
@@ -127,6 +136,8 @@
            <div class="thumbnail col-sm-6 col-md-4"><img class="box" src="Frontend/www/images/box9.JPG" > <div class="caption"> <p class="textName">Розкішний сюрприз</p> <p class="description">квіточки, свічка, червоне вино, сухофрукти, карамель</p> <p class="price">489 грн</p></div>  <div class="BuyAndDetailsButtons"> <button class="details">Детальніше</button> <button class="buy">В кошик</button></div> </div> -->
          
        </div>
+
+     
 
 
 
@@ -172,4 +183,6 @@
 <script type="text/javascript"  src="assests/js/cart.js"> </script>
 
 <script type="text/javascript"  src="assests/js/main.js"> </script> 
+
+<script type="text/javascript"  src="assests/js/scroll.js"> </script> 
 
