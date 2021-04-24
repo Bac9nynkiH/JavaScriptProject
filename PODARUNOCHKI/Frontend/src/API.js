@@ -36,3 +36,10 @@ exports.getBoxList = function (callback) {
 exports.createOrder = function (order_info, callback) {
     backendPost("/api/create-order/", order_info, callback);
 };
+
+exports.createUser = function (user, call_back) {
+    backendPost("/login.html", user, call_back);
+}
+exports.checkUserInSystem = function (user_data, callback) {
+    backendPost("/", user_data, callback);
+}

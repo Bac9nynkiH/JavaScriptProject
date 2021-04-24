@@ -5,6 +5,13 @@ var Cart = [];
 
 var $cart = $('#cart');
 
+$('#h2Clear').click(function () {
+    Cart = [];
+    updateCart();
+})
+
+
+
 function addToCart(box){
     var contains=false;
     for(var i=0;i<Cart.length;i++){
@@ -38,7 +45,11 @@ function removeFromCart(cart_item) {
 
 
 function updateCart() {
-    $('#countBougthItems').html(Cart.length);
+    var count=0;
+    for(var i=0; i<Cart.length;i++){
+        count+=Cart[i].quantity;
+    }
+    $('#countBougthItems').html(count);
     //Функція викликається при зміні вмісту кошика
     //Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
 

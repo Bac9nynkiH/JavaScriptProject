@@ -7,8 +7,14 @@ exports.mainPage = function(req, res) {
     });
 };
 
-exports.orderPage = function(req, res) {
-    res.render('orderPage', {
-        pageTitle: 'Замовлення Піци'
+exports.signUpPage = function(req, res) {
+    res.render('signUpPage', {
+        pageTitle: 'Реєстрація'
+    });
+};
+
+exports.loginPage = function (req, res) {
+    res.render('loginPage', {
+        pageTitle: 'login'
     });
 };

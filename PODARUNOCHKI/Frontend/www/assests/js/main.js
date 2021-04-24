@@ -37,6 +37,13 @@ exports.getBoxList = function (callback) {
 exports.createOrder = function (order_info, callback) {
     backendPost("/api/create-order/", order_info, callback);
 };
+
+exports.createUser = function (user, call_back) {
+    backendPost("/login.html", user, call_back);
+}
+exports.checkUserInSystem = function (user_data, callback) {
+    backendPost("/", user_data, callback);
+}
 },{}],2:[function(require,module,exports){
 var box_info = [
     {
@@ -209,16 +216,23 @@ module.exports = box_info;
 
 var ejs = require('ejs');
 
-exports.BoxChoice_OneItem = ejs.compile("<html>\r\n   <div class=\"thumbnail col-sm-6 col-md-4\">\r\n       <img class=\"box\" src=\"<%= box.img %>\" >\r\n       <div class=\"caption\"> \r\n           <p class=\"textName\"><%= box.title %></p> \r\n           <p class=\"description\"><%= box.description %></p> \r\n           <p class=\"price\"><%= box.price %></p>\r\n        </div>\r\n        <div class=\"BuyAndDetailsButtons\"> \r\n            <button class=\"details\">Детальніше</button> \r\n            <button class=\"buy\">В кошик</button>\r\n        </div> \r\n    </div>\r\n</html>");
+exports.BoxChoice_OneItem = ejs.compile("<html>\r\n   <div class=\"thumbnail col-sm-6 col-md-4\">\r\n       <img class=\"box\" src=\"<%= box.img %>\" >\r\n       <div class=\"caption\"> \r\n           <p class=\"textName\"><%= box.title %></p> \r\n           <p class=\"description\"><%= box.description %></p> \r\n           <p class=\"price\"><%= box.price %> грн</p>\r\n        </div>\r\n        <div class=\"BuyAndDetailsButtons\"> \r\n            <button class=\"details\">Детальніше</button> \r\n            <button class=\"buy\">В кошик</button>\r\n        </div> \r\n    </div>\r\n</html>");
 
 exports.BoxCart_OneItem = ejs.compile("    <div class=boughtRow>\r\n            <h3 id='bought'><%= cart_item.box.title %> </h3>\r\n            <div class='boughtBlock'>\r\n            <img class='BoughtImg' src='<%= cart_item.box.img %>' >\r\n            <span class='price'><%= cart_item.box.price*cart_item.quantity %></span><span> грн.<span>\r\n            <button data-tooltip='toolTip' class='minus'>-</button> <label class='Labelamount'>\r\n            <div class='DivCount'><%= cart_item.quantity %></div>\r\n                </label> <button data-tooltip='toolTip' class='circle plus'>+</button>\r\n            <button data-tooltip='toolTip' class='X'>x</button>\r\n                </div>\r\n    </div>");
-},{"ejs":8}],4:[function(require,module,exports){
+},{"ejs":10}],4:[function(require,module,exports){
 var Templates = require('../Templates');
 
 
 var Cart = [];
 
 var $cart = $('#cart');
+
+$('#h2Clear').click(function () {
+    Cart = [];
+    updateCart();
+})
+
+
 
 function addToCart(box){
     var contains=false;
@@ -253,7 +267,11 @@ function removeFromCart(cart_item) {
 
 
 function updateCart() {
-    $('#countBougthItems').html(Cart.length);
+    var count=0;
+    for(var i=0; i<Cart.length;i++){
+        count+=Cart[i].quantity;
+    }
+    $('#countBougthItems').html(count);
     //Функція викликається при зміні вмісту кошика
     //Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
 
@@ -310,7 +328,12 @@ const API = require("../API");
 var Pizza_List = API.getBoxList(initBoxList);
 
 
+
 function initialiseMenu() {
+    if (sessionStorage.getItem('user')!=null)
+    console.log('here it comes');
+    else
+    console.log('not now');
     API.getBoxList(initBoxList);
 }
 
@@ -352,7 +375,53 @@ function showBoxList(list) {
 
 exports.initialiseMenu=initialiseMenu;
 },{"../API":1,"../Templates":3,"./BoxCart":4}],6:[function(require,module,exports){
+var API = require('../API');
+var exist=false;
+
+function sendToBack(error, data) {
+    if (!error) {
+        let user = data;
+        console.log("Data from bacK: " + user.email);
+        console.log(user);
+        if (user.email) {
+            console.log('200 OK');
+            exist = true;
+            window.location.href = 'http://localhost:3050';
+            sessionStorage.setItem('user', JSON.stringify(user));
+            console.log(sessionStorage.getItem('user'));
+          
+        }
+        else {
+            console.log('user does not exist');
+      
+        }
+    }
+    else {
+        console.log('error');
+    }
+}
+
+$('#sendUserData').on('click', function () {
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var user_data = {
+        email: email,
+        password: password
+    }
+    console.log(user_data);
+    API.checkUserInSystem(user_data, sendToBack);
+  
+        
+        
+});
+
+
+},{"../API":1}],7:[function(require,module,exports){
 $(function () {
+
+
+    var loginPage = require('./login/login');
+    var signUpPage = require('./signUp/signUp');
     //This code will execute when the page is ready
     var BoxesChoice = require('./boxes/BoxesChoice');
     //var PizzaCart = require('./pizza/PizzaCart');
@@ -362,10 +431,80 @@ $(function () {
     BoxesChoice.initialiseMenu();
 
 
-});
-},{"./Box_List":2,"./boxes/BoxesChoice":5}],7:[function(require,module,exports){
+  
 
-},{}],8:[function(require,module,exports){
+});
+},{"./Box_List":2,"./boxes/BoxesChoice":5,"./login/login":6,"./signUp/signUp":8}],8:[function(require,module,exports){
+const API = require('../API');
+var email;
+var login;
+var password;
+var code;
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+    //max & min inclusive
+}
+
+function sendMail(login, email) {
+    const code = getRandomInt(0, 9999);
+    Email.send({
+        Host: "smtp.gmail.com",
+        Username: "podarunochkiservice@gmail.com",
+        Password: "PodarunochkiService1<>",
+        To: email,
+        From: "podarunochkiservice@gmail.com",
+        Subject: "Verification Letter",
+        Body: "Dear " + login + ",\r\n"
+            + "You are registering at our website.\r\n"
+            + "To confirm your email addres, please enter the following code:\r\n"
+            + code,
+    })
+        .then(function (message) {
+            
+        });
+    return code;
+}
+
+var user={};
+
+$('#signUp').click(function () {
+    login = $('#Login').val();
+    user.login=login;
+    email=$('#email').val();
+    user.email=email;
+    password = $('#Password').val();
+    user.password=password;
+    code = sendMail(login,email);
+    $('#VerificationArea').css('display', 'block');
+    $('#signUp').val('надіслати код повторно');
+});
+
+function sendToBack(error, data) {
+    if (!error) {
+        console.log(data);
+        window.location.href = 'http://localhost:3050/signUpPage.html';
+    }
+    else {
+        console.log('error');
+    }
+}
+
+$('#VerificationButton').click(function () {
+   
+    usersCode = $('#VerCode').val();
+    if(usersCode==code){
+        API.createUser(user, sendToBack);
+    }
+   
+});
+
+
+},{"../API":1}],9:[function(require,module,exports){
+
+},{}],10:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1347,7 +1486,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":10,"./utils":9,"fs":7,"path":11}],9:[function(require,module,exports){
+},{"../package.json":12,"./utils":11,"fs":9,"path":13}],11:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1516,7 +1655,7 @@ exports.cache = {
   }
 };
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
@@ -1555,7 +1694,7 @@ module.exports={
   }
 }
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (process){
 // .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
 // backported and transplited with Babel, with backwards-compat fixes
@@ -1861,7 +2000,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":12}],12:[function(require,module,exports){
+},{"_process":14}],14:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2047,4 +2186,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[6]);
+},{}]},{},[7]);

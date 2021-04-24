@@ -6,7 +6,12 @@ const API = require("../API");
 var Pizza_List = API.getBoxList(initBoxList);
 
 
+
 function initialiseMenu() {
+    if (sessionStorage.getItem('user')!=null)
+    console.log('here it comes');
+    else
+    console.log('not now');
     API.getBoxList(initBoxList);
 }
 

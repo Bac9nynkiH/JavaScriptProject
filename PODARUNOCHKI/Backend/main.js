@@ -5,6 +5,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var fs=require('fs');
 var ejs=require('ejs');
+let urlencodeParser = bodyParser.urlencoded({ extended: false });
 
 function configureEndpoints(app) {
     var pages = require('./pages');
@@ -19,6 +20,18 @@ function configureEndpoints(app) {
     //Сторінки
     //Головна сторінка
     app.get('/', pages.mainPage);
+    app.post('/', api.checkUserInSystem);
+
+
+   
+
+    app.get('/signUpPage.html', pages.signUpPage);
+
+    
+    app.get('/login.html', pages.loginPage);
+    app.post('/login.html', api.createUser);
+
+  
 
 
 
@@ -47,6 +60,8 @@ function startServer(port) {
     app.listen(port, function () {
         console.log('My Application Running on http://localhost:' + port + '/');
     });
+
+    
 }
 
 

@@ -1,4 +1,3 @@
-
 <div id='shownCart'>
   <div id='BuyMenu'>
       <h2 id=h2YourOrder>
@@ -8,83 +7,86 @@
           <div id='cart'></div>
           <div id='total'></div>
       </div>
-      <div class="InputName">
-          <p data-required='Обовязково для заповнення' class="RequiredData">
-              ПІБ замовника
-          </p>
-          <input type="text" class="InputField" id="NameField" placeholder="Іванов Іван Іванович">
+
+      <div class="InputName">       
+              <p class="line"><b>ПІБ замовника</b><p>
+          
+          <input type="text" for="exampleInputEmail1" class="InputField" id="NameField" placeholder="Іванов Іван Іванович">
+          <label id="nameError"></label>
       </div>
-      <div class="InputNum">
-          <p data-required='Обовязково для заповнення' class="RequiredData">
-              Контактний номер замовника
-          </p>
+
+
+      <div class="InputNum">    
+            <p class="line"><b>Контактний номер замовника</b></p>         
           <input type="text" class="InputField" id="PhoneField" placeholder="+380990999999">
+          <label id="phoneError"></label>
       </div>
-      <div class="InputEmail">
-          <p data-required='Сюди ми відправимо копію замовлення' class="RequiredData">
-              E-mail
-          </p>
-          <input type="text" class="InputField" id="PhoneField" placeholder="IvanIvanov@ukr.net">
+
+      <div class="InputEmail">         
+            <p class="line"><b>E-mail</b></p>          
+          <input type="text" class="InputField" id="EmailField" placeholder="IvanIvanov@ukr.net">
       </div>
 
       <form>
-        <p data-required='Обовязково для заповнення' class="RequiredData">
-              Форма оплати
-          </p>
+       
+          <p class="line"><b>Форма оплати</b></p>
+          
         <div>
           <div class="radioChoise">
-            <input type="radio" id="PaymentChoice1"
-                  name="contact" value="cash">
-            <label for="contactChoice1">Готівка</label>
+            <input required type="radio" id="PaymentChoice1"
+                  name="contact" value="cash" >
+            <label for="contactChoice1" name="payChoice">Готівка</label >
           </div>
           <div class="radioChoise">
             <input type="radio" id="PaymentChoice2"
                   name="contact" value="BeforeBuying">
-            <label for="PaymentChoice2">Повна предоплата</label>
+            <label for="PaymentChoice2" name="payChoice">Повна передплата</label>
           </div>
           <div class="radioChoise">
             <input type="radio" id="PaymentChoice3"
                   name="contact" value="Partly">
-            <label for="PaymentChoice3">Часткова предоплата</label>
+            <label for="PaymentChoice3" name="payChoice">Часткова передплата</label>
           </div>
         </div>
       </form>
 
       <form>
-        <p data-required='Обовязково для заповнення' class="RequiredData">
-              Спосіб доставки
-          </p>
+          <p class="line"><b>Спосіб доставки</b></p>        
         <div>
           <div class="radioChoise">
-            <input type="radio" id="PaymentChoice1"
-                  name="contact" value="cash">
-            <label for="contactChoice1">Відправка новою поштою(на відділення)</label>
+            <input type="radio" id="deliveryChoice1"
+                  name="contact2" value="cash">
+            <label for="deliveryChoice1">Відправка новою поштою(на відділення)</label>
           </div>
           <div class="radioChoise">
-            <input type="radio" id="PaymentChoice2"
-                  name="contact" value="BeforeBuying">
-            <label for="PaymentChoice2">Відправка новою поштою(адресна)</label>
+            <input type="radio" id="deliveryChoice2"
+                  name="contact2" value="BeforeBuying">
+            <label for="deliveryChoice2">Відправка новою поштою(адресна)</label>
           </div>
           <div class="radioChoise">
-            <input type="radio" id="PaymentChoice3"
-                  name="contact" value="Partly">
-            <label for="PaymentChoice3">Самовивіз</label>
+            <input type="radio" id="deliveryChoice3"
+                  name="contact2" value="Partly">
+            <label for="deliveryChoice3">Самовивіз</label>
           </div>
         </div>
       </form>
 
       <div class="InputNum">
-          <p data-required='Обовязково для заповнення' class="RequiredData">
-              Населений пункт
-          </p>
-          <input type="text" class="InputField" id="PhoneField" placeholder="Київ">
+             
+              <p class="line"><b>Населений пункт</b></p>  
+
+          <input type="text" class="InputField" id="CityField" placeholder="Київ">
       </div>
       <div class="InputNum">
-          <p data-required='Тільки якщо Нова Пошта' class="RequiredData">
-            Номер відділення Нової Пошти
-          </p>
-          <input type="text" class="InputField" id="PhoneField" placeholder="5">
+
+        <p class="line"><b>Номер відділення Нової Пошти</b></p>  
+          
+          <input type="text" class="InputField" id="numberField" placeholder="5">
       </div>
       
+      <div class="buyDiv">
+      <button  class="buyCart" id="submit-order" type='button' >КУПИТИ</button>
+    </div> 
   </div>
 </div>
+

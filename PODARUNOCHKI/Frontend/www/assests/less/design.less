@@ -204,6 +204,18 @@ figcaption {
     bottom: -20px;
 
 }
+.li::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0 !important;
+    text-align: start !important;
+    text-align-last: start !important;
+}
+#submit-order {}
+#NameField {
+    outline: none;
+}
 .InputField {
     margin-top: 5px;
     border-radius: 1em;
@@ -237,6 +249,22 @@ figcaption {
     display: none;
 }
 
+.buyDiv {
+    display: flex;
+    justify-content: center;
+    max-width: 460px;
+}
+.buyCart {
+    margin-top: 10px;
+    align-self: center;
+    background-color: #78192f;
+    font-size: 16px;
+    font-weight: bold;
+    color: aliceblue;
+    border-radius: 9px;
+    padding: 8px;
+    border: none;
+}
 
 .ourStoryText {
 
@@ -325,6 +353,7 @@ figcaption {
 // }
 .BuyAndDetailsButtons {
     max-width: 100%;
+    font-size: 15px;
     display: flex;
     justify-content: space-between;
 }
@@ -407,47 +436,140 @@ td {
 }
 #map {
     padding-top: 10px;
-    width: 500px;
-    height: 300px;
+    width: 100%;
+    height: 500px;
     margin: auto;
 }
 
 
-.BoughtImg{
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: scale(0.2);
+.BoughtImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(0.2);
 }
-.boughtRow{
-  height: 300px;
-  max-height: 300px;
+.boughtRow {
+    height: 300px;
+    max-height: 300px;
 }
 
 .boughtBlock {
-  height: 300px;
+    height: 300px;
     max-height: 300px;
 }
 #countBougthItemsCircle {
-  z-index: 110;
-  top:220px;
-  right: 120px;
-  position: fixed;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  background-color: red;
+    z-index: 110;
+    top: 220px;
+    right: 120px;
+    position: fixed;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: red;
 }
 
-#countBougthItems{
-  display: inline-block;
-  margin: auto;
-  font-size: 16px;
-  width: 40px;
-  height: 40px;
-  padding-left: 15px;
-  padding-top: 10px;
+#countBougthItems {
+    display: inline-block;
+    margin: auto;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    padding-left: 15px;
+    padding-top: 10px;
 }
+.caption {
+    height: 136px;
+}
+
+
+.ourContacts,
+.Delivery,
+.comment {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 120px;
+    margin-bottom: 30px;
+}
+
+.ourNumber,
+.weOnTheMap,
+.ourMail {
+    text-align: center;
+    font-size: 15px;
+}
+
+.del,
+.pay,
+.return {
+    font-size: 19px;
+    margin-left: 60px;
+    margin-top: 10px;
+
+
+}
+#l {
+    border-bottom: 1px solid #000000;
+}
+.lineD {
+    border-top: 1px solid #000000;
+
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+}
+.plusInfo {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    border: none;
+    font-size: 31px;
+    width: 31px;
+    height: 31px;
+    align-items: center;
+}
+
+.plusInfo:hover {
+    margin-top: 10px;
+    border-radius: 100%;
+    color: white;
+    left: 0;
+    background-color: red;
+    line-height: 4px;
+    padding: 7px;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: inherit;
+    margin-left: 10px;
+}
+
+.plusDel:active {}
+#Info,
+#Info2,
+#Info3 {
+    display: none;
+    font-size: 14px;
+    margin: 5px 5px 5px 60px;
+}
+
+.foot {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 100px;
+}
+
+
+
 .caption{
   height: 136px;
+}
+.registrationPageInputAndLabel{
+    margin: 10px;
+    display: block;
+    width: 60%;
+
+}
+#VerificationArea{
+    display: none;
 }

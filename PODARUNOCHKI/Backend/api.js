@@ -4,6 +4,78 @@
 
 // const PUBLIC_KEY = 'sandbox_i92197953769';
 // const PRIVATE_KEY = 'sandbox_e4zCdTQrK15rQNwJponDUuzPTaEao4w2ChDVrq4l';
+const bcrypt = require('bcrypt');
+const mysql = require("mysql");
+var array = [];
+const sql = "INSERT INTO users(login, email, password) VALUES(?, ?, ?)";
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    database: "usersdb",
+    password: "FIAM2001zxc<3",
+    timezone: "local"
+});
+
+connection.connect(function (err) {
+    if (err) {
+        return console.error("Ошибка: " + err.message);
+    }
+    else {
+        console.log("Подключение к серверу MySQL успешно установлено");
+    }
+});
+
+
+
+
+exports.createUser = function (req, res) {
+    let user = req.body;
+    let hash = bcrypt.hashSync(user.password, 10);
+    console.log(user.password);
+    console.log(hash);
+    let db_user = [user.login, user.email, hash];
+    if (array.includes(user)) {
+        res.send('user exist');
+    } else {
+        connection.query(sql, db_user, function (err, results) {
+            if (err) console.log(err);
+            else console.log("Данные добавлены");
+        });
+        array.push(user);
+        res.send(array);
+    }
+}
+
+exports.checkUserInSystem = function (req, res) {
+    let user = req.body;
+    let exist = false;
+    connection.query("SELECT * FROM users",
+        function (err, results, fields) {
+            console.log(err);
+            console.log(results);
+            if (results.length === 0) {
+                console.log('Db is empty');
+                res.send([]);
+                return;
+            }
+            console.log(results[0].password);
+            console.log(user.password);
+            if (results[0].email === user.email && bcrypt.compareSync(user.password, results[0].password)) {
+                console.log('Match');
+                exist = true;
+                user.name = results[0].name;
+                res.send(user);
+                return true;
+            }
+            else {
+                console.log('Does not Match');
+                res.send([]);
+                return false;
+            }
+        });
+        
+}
+
 
 
 var Box_List = require('./data/Box_List');
