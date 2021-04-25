@@ -12,22 +12,7 @@
 <body>
   <img id='cartIcon' src="assests/images/cart.png">
   <span id='countBougthItemsCircle'><p id="countBougthItems"></p></span>
-  <header class="headerMarketingUa">
-    <div class="headerBody">
-        <img class="logoImage" src="assests/images/logo.jpeg">
-    <nav>
-      <ul class="navBarClass" id="navBarClass">
-        <li class="navLi"><button class="createBoxButton" href="http://localhost:3050/login.html">login</button></li>
-        <li class="navLi"><a href="#mainPage">головна сторінка</a></li>
-        <li class="navLi"><a href="#completeScroll">готові подарунки</a></li>
-        <li class="navLi"><a href="#deliveryAndPay">доставка і оплата</a></li>
-        <li class="navLi" id="vid"><a href="">відгуки</a></li>
-        <li class="navLi" id="contacts"><a href="#ourContacts">контакти</a></li>
-        <li class="navLi"><button class="createBoxButton" href="http://localhost:3050/createBox.html">Cтворити бокс</button></li>       
-      </ul>
-    </nav>
-    </div>
-  </header>
+  <% include common/header.ejs %>
 
   
   <div class="container" >
@@ -947,16 +932,21 @@
   </div>
 
 
-  <div id="comments">
+  <div class="row">
+    <div class="col-sm-2"></div>
+  <div class="col-sm-8" id="comments">
     <p class="comment">ВІДГУКИ</p>
+    <div id='AreaAndButton'>
     <input type="text" id='commentInput'>
-    <button id='sendCommnet'>Додати комментарій</button>
+    <button id='sendCommnet'>Додати коментар</button>
+    </div>
     <div id='CommentsSection'>
       
     </div>
-     
-
   </div>
+
+  <div class="col-sm-2"></div>
+</div>
 
 
   <div class="contacts"> <p class="ourContacts" id="ourContacts">НАШІ КОНТАКТИ</p>

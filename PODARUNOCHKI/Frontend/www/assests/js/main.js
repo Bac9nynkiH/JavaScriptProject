@@ -70,7 +70,7 @@ exports.BoxChoice_OneItem = ejs.compile("<html>\r\n   <div class=\"thumbnail col
 
 exports.BoxCart_OneItem = ejs.compile("    <div class=boughtRow>\r\n            <h3 id='bought'><%= cart_item.box.title %> </h3>\r\n            <div class='boughtBlock'>\r\n            <img class='BoughtImg' src='<%= cart_item.box.img %>' >\r\n            <span class='price'><%= cart_item.box.price*cart_item.quantity %></span><span> грн.<span>\r\n            <button data-tooltip='toolTip' class='minus'>-</button> <label class='Labelamount'>\r\n            <div class='DivCount'><%= cart_item.quantity %></div>\r\n                </label> <button data-tooltip='toolTip' class='circle plus'>+</button>\r\n            <button data-tooltip='toolTip' class='X'>x</button>\r\n                </div>\r\n    </div>");
 
-exports.CommentItem = ejs.compile("<div class=\"loginPlace\"><%= comment.login %></div>\r\n<div class=\"commentPlace\"><%= comment.comment %></div>");
+exports.CommentItem = ejs.compile("<div class=\"commentTextAndLogin\">\r\n<div class=\"loginPlace\"><%= comment.login %></div>\r\n<div class=\"commentPlace\"><%= comment.comment %></div>\r\n</div>");
 
 exports.singleItem = ejs.compile("<html>\r\n   <div class=\"thumbnail col-sm-6 col-md-4\">\r\n       <img class=\"box\" src=\"<%= singleItem.img %>\" >\r\n       <div class=\"caption\"> \r\n           <p class=\"textName\"><%= singleItem.title %></p> \r\n           <p class=\"description\"><%= singleItem.description %></p> \r\n           <p class=\"price\"><%= singleItem.price %> грн</p>\r\n        </div>\r\n        <div class=\"BuyAndDetailsButtons\"> \r\n           \r\n            <button class=\"buy\">В кошик</button>\r\n        </div> \r\n    </div>\r\n</html>");
 },{"ejs":11}],3:[function(require,module,exports){
@@ -98,8 +98,9 @@ $('#h2Clear').click(function () {
 
 function addToCart(box){
     var contains=false;
+    console.log(Cart);
     for(var i=0;i<Cart.length;i++){
-        if(Cart[i].box==box){
+        if(Cart[i].box.id==box.id){
             contains=true;
             Cart[i].quantity++;
             break;
@@ -113,7 +114,7 @@ function addToCart(box){
         });
     }
 
-    localStorage.setItem('Cart', JSON.stringify(Cart));
+    
 
     updateCart();
 
@@ -172,6 +173,7 @@ function updateCart() {
 
         $cart.append($node);
     }
+    localStorage.setItem('Cart', JSON.stringify(Cart));
     
     Cart.forEach(showOnePizzaInCart);
 }
@@ -397,6 +399,13 @@ $('#sendCommnet').click(function () {
 function initialiseComments() {
     if (sessionStorage.getItem('user') == null)
         document.getElementById('sendCommnet').disabled=true;
+    else{
+        $('#LoginOrLoged').html('Logged');
+        $('#LoginOrLoged').click(function () {
+            sessionStorage.removeItem('user');
+            window.location.href = 'http://localhost:3050';
+        });
+        }
     API.getCommentsList(initCommentList);
 }
 

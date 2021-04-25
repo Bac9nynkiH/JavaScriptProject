@@ -60,6 +60,13 @@ $('#sendCommnet').click(function () {
 function initialiseComments() {
     if (sessionStorage.getItem('user') == null)
         document.getElementById('sendCommnet').disabled=true;
+    else{
+        $('#LoginOrLoged').html('Logged');
+        $('#LoginOrLoged').click(function () {
+            sessionStorage.removeItem('user');
+            window.location.href = 'http://localhost:3050';
+        });
+        }
     API.getCommentsList(initCommentList);
 }
 

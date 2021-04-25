@@ -22,8 +22,9 @@ $('#h2Clear').click(function () {
 
 function addToCart(box){
     var contains=false;
+    console.log(Cart);
     for(var i=0;i<Cart.length;i++){
-        if(Cart[i].box==box){
+        if(Cart[i].box.id==box.id){
             contains=true;
             Cart[i].quantity++;
             break;
@@ -37,7 +38,7 @@ function addToCart(box){
         });
     }
 
-    localStorage.setItem('Cart', JSON.stringify(Cart));
+    
 
     updateCart();
 
@@ -96,6 +97,7 @@ function updateCart() {
 
         $cart.append($node);
     }
+    localStorage.setItem('Cart', JSON.stringify(Cart));
     
     Cart.forEach(showOnePizzaInCart);
 }
