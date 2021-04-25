@@ -1,3 +1,5 @@
+
+
 var cartIsOpened=false;
 $("#cartIcon").click(function () {
     if (!cartIsOpened){
@@ -15,9 +17,7 @@ $("#cartIcon").click(function () {
 });
 
 $("#shownCart").click(function()  {
-    console.log($(event.target));
-    console.log($(event.currentTarget));
-    console.log(event.target == event.currentTarget)
+   
     if (event.target==event.currentTarget){
         cartIsOpened = false;
         $('#BuyMenu').css('display', 'none');
@@ -28,4 +28,5 @@ $("#shownCart").click(function()  {
 
         return;
     }
-})
+});
+

@@ -16,20 +16,30 @@ function configureEndpoints(app) {
     //Налаштування URL за якими буде відповідати сервер
     //Отримання списку піц
     app.get('/api/get-box-list/', api.getBoxList);
+    app.get('/api/get-comment-list/', api.getCommentsList);
+    app.get('/api/get-item-list/', api.getItemList);
 
+    app.post('/api/create-order/', api.createOrder);
     //Сторінки
     //Головна сторінка
     app.get('/', pages.mainPage);
-    app.post('/', api.checkUserInSystem);
+    app.post('/', api.createComment);
+   
+
+    app.get('/createBox.html', pages.createBox);
+    
 
 
    
 
     app.get('/signUpPage.html', pages.signUpPage);
-
+    app.post('/signUpPage.html', api.createUser);
     
     app.get('/login.html', pages.loginPage);
-    app.post('/login.html', api.createUser);
+    app.post('/login.html', api.checkUserInSystem);
+   
+
+
 
   
 

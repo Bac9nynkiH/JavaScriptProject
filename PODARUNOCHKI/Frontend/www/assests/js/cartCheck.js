@@ -46,7 +46,7 @@ $("#PhoneField").keyup(function(){
 });
 
 $('#BuyMenu').click(function name(params) {
-    console.log($('input[name=contact]:checked').length == 0);
+  
     bool3=true;
     document.getElementById("submit-order").disabled = false;
 if ($('input[name=contact]:checked').length == 0) {

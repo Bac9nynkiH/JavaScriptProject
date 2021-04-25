@@ -1,7 +1,15 @@
 var Templates = require('../Templates');
 
-
-var Cart = [];
+var Cart;
+function initialiseCart() {
+    if (localStorage.getItem('Cart') != null) {
+        Cart = JSON.parse(localStorage.getItem('Cart'));
+    }
+    else
+        Cart = [];
+    updateCart();
+}
+    
 
 var $cart = $('#cart');
 
@@ -28,6 +36,8 @@ function addToCart(box){
             quantity:1
         });
     }
+
+    localStorage.setItem('Cart', JSON.stringify(Cart));
 
     updateCart();
 
@@ -90,9 +100,13 @@ function updateCart() {
     Cart.forEach(showOnePizzaInCart);
 }
 
+function getCart() {
+    return Cart;
+}
 
 
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
+exports.initialiseCart=initialiseCart;
 
-exports.Cart=Cart;
+exports.getCart=getCart;

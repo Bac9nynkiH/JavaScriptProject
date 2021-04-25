@@ -15,6 +15,7 @@ function backendGet(url, callback) {
 }
 
 function backendPost(url, data, callback) {
+   
     $.ajax({
         url: API_URL + url,
         type: 'POST',
@@ -34,196 +35,57 @@ exports.getBoxList = function (callback) {
     backendGet("/api/get-box-list/", callback);
 };
 
+exports.getCommentsList = function (callback) {
+    backendGet("/api/get-comment-list/", callback);
+};
+
 exports.createOrder = function (order_info, callback) {
     backendPost("/api/create-order/", order_info, callback);
 };
 
 exports.createUser = function (user, call_back) {
-    backendPost("/login.html", user, call_back);
+    backendPost("/signUpPage.html", user, call_back);
 }
+
+exports.createComment = function (comment, call_back) {
+    backendPost("/", comment, call_back);
+}
+
 exports.checkUserInSystem = function (user_data, callback) {
-    backendPost("/", user_data, callback);
+    backendPost("/login.html", user_data, callback);
 }
+
+exports.createOrder = function (payment_info, callback) {
+    backendPost("/api/create-order/", payment_info, callback);
+};
+
+exports.getItemList = function (callback) {
+    backendGet("/api/get-item-list/", callback);
+};
 },{}],2:[function(require,module,exports){
-var box_info = [
-    {
-        id: 1,
-        class: 'Easter',
-        title: 'Весняний комплімент',
-        img: 'assests/images/box13east.JPG',
-        description: 'з ароматним чаєм і смаколиками',
-        price: 195
-    },
-
-    {
-        id: 2,
-        class: 'Easter',
-        title: 'Ніжні барви',
-        img: 'assests/images/box15east.JPG',
-        description: 'з тематичними деталями і смаколиками',
-        price: 175
-    },
-
-    {
-        id: 3,
-        class: 'Easter',
-        title: 'Весняний пакунок',
-        img: 'assests/images/box8east.JPG',
-        description: 'чай, тематичні пряники, смаколики',
-        price: 225
-    },
-
-    {
-        id: 4,
-        class: 'Him',
-        title: 'Набір для догляду',
-        img: 'assests/images/men.JPG',
-        description: 'шампунь, гель для душу, крем для рук, бальзам після гоління, листівка',
-        price: 359
-    },
-
-    {
-        id: 5,
-        class: 'Him',
-        title: 'Приємні дрібниці',
-        img: 'assests/images/formen.JPG',
-        description: 'смачний фруктовий чай та кава, фляжка та смаколики',
-        price: 310
-    },
-
-    {
-        id: 6,
-        class: 'Him',
-        title: 'Елегантний',
-        img: 'assests/images/forhim.JPG',
-        description: 'блокнот, смачний чай, цукерки, шоколад, горішки',
-        price: 265
-    },
-
-    {
-        id: 7,
-        class: 'Her',
-        title: 'Ідеально до 8 березня',
-        img: 'assests/images/box188march.JPG',
-        description: 'листівка, пряник в вигляді вісьмірки, чашка та солоденьке',
-        price: 279
-    },
-
-
-    {
-        id: 8,
-        class: 'Her',
-        title: 'Рожеві приємності',
-        img: 'assests/images/forHer.JPG',
-        description: 'зефір, шоколад, джем, цукерки, антисептик з ароматом троянди',
-        price: 339
-    },
-
-    {
-        id: 9,
-        class: 'Her',
-        title: 'Квітковий бокс',
-        img: 'assests/images/box5.JPG',
-        description: 'сіль для ванни, кокосове масло для тіла, букетик, листівка і солоденьке',
-        price: 229
-    },
-
-    {
-        id: 10,
-        class: 'Sweeties',
-        title: 'Бадьорий пакунок',
-        img: 'assests/images/box16.JPG',
-        description: 'кава, апельсиновий мармелад, склянка, горішки',
-        price: 275
-    },
-
-    {
-        id: 11,
-        class: 'Sweeties',
-        title: 'Для затишного вечора',
-        img: 'assests/images/box14.JPG',
-        description: 'какао, ванільний зефір, імбирне печиво, ніжні деталі',
-        price: 140
-    },
-
-    {
-        id: 12,
-        class: 'Sweeties',
-        title: 'Цінувачам кави',
-        img: 'assests/images/box11.JPG',
-        description: 'заварник для кави, чашка з блюдечком, кава, шоколадні цукерки',
-        price: 390
-    },
-
-    {
-        id: 13,
-        class: 'NewYear',
-        title: 'Набір для глінтвейну',
-        img: 'assests/images/newYear.JPG',
-        description: 'Спеції для глінтвейну, червоне сухе вино, класична склянка , смаколики, листівка',
-        price: 695
-    },
-
-    {
-        id: 14,
-        class: 'NewYear',
-        title: 'Затишний подарунок',
-        img: 'assests/images/box10newyear.JPG',
-        description: 'Шкарпетки, пряник Дід Мороз, упаковка какао, солодощі, дерев’яна ялинка',
-        price: 240
-    },
-
-    {
-        id: 15,
-        class: 'NewYear',
-        title: 'Новорічні солодощі',
-        img: 'assests/images/box12.JPG',
-        description: 'Баночки з трьома видами джему, цукерки, шоколад, пряники-зірочки',
-        price: 329
-    },
-
-    {
-        id: 16,
-        class: 'SaintValentine',
-        title: 'Для солодкоїжок',
-        img: 'assests/images/love.JPG',
-        description: 'упаковка в вигляді сердечка, жуйки, шоколад, листівка',
-        price: 369
-    },
-
-    {
-        id: 17,
-        class: 'SaintValentine',
-        title: 'Ніжний подарунок',
-        img: 'assests/images/box3.JPG',
-        description: 'дерев’яний бокс, шампаньске, свічка, букетик, пряник, цукерки, чай і листівка',
-        price: '440 грн'
-    },
-
-    {
-        id: 18,
-        class: 'SaintValentine',
-        title: 'Розкішний сюрприз',
-        img: 'assests/images/box9.JPG',
-        description: 'квіточки, свічка, червоне вино, сухофрукти, карамель',
-        price: 489
-    },
-
-
-];
-module.exports = box_info;
-},{}],3:[function(require,module,exports){
 
 var ejs = require('ejs');
 
 exports.BoxChoice_OneItem = ejs.compile("<html>\r\n   <div class=\"thumbnail col-sm-6 col-md-4\">\r\n       <img class=\"box\" src=\"<%= box.img %>\" >\r\n       <div class=\"caption\"> \r\n           <p class=\"textName\"><%= box.title %></p> \r\n           <p class=\"description\"><%= box.description %></p> \r\n           <p class=\"price\"><%= box.price %> грн</p>\r\n        </div>\r\n        <div class=\"BuyAndDetailsButtons\"> \r\n            <button class=\"details\">Детальніше</button> \r\n            <button class=\"buy\">В кошик</button>\r\n        </div> \r\n    </div>\r\n</html>");
 
 exports.BoxCart_OneItem = ejs.compile("    <div class=boughtRow>\r\n            <h3 id='bought'><%= cart_item.box.title %> </h3>\r\n            <div class='boughtBlock'>\r\n            <img class='BoughtImg' src='<%= cart_item.box.img %>' >\r\n            <span class='price'><%= cart_item.box.price*cart_item.quantity %></span><span> грн.<span>\r\n            <button data-tooltip='toolTip' class='minus'>-</button> <label class='Labelamount'>\r\n            <div class='DivCount'><%= cart_item.quantity %></div>\r\n                </label> <button data-tooltip='toolTip' class='circle plus'>+</button>\r\n            <button data-tooltip='toolTip' class='X'>x</button>\r\n                </div>\r\n    </div>");
-},{"ejs":10}],4:[function(require,module,exports){
+
+exports.CommentItem = ejs.compile("<div class=\"loginPlace\"><%= comment.login %></div>\r\n<div class=\"commentPlace\"><%= comment.comment %></div>");
+
+exports.singleItem = ejs.compile("<html>\r\n   <div class=\"thumbnail col-sm-6 col-md-4\">\r\n       <img class=\"box\" src=\"<%= singleItem.img %>\" >\r\n       <div class=\"caption\"> \r\n           <p class=\"textName\"><%= singleItem.title %></p> \r\n           <p class=\"description\"><%= singleItem.description %></p> \r\n           <p class=\"price\"><%= singleItem.price %> грн</p>\r\n        </div>\r\n        <div class=\"BuyAndDetailsButtons\"> \r\n           \r\n            <button class=\"buy\">В кошик</button>\r\n        </div> \r\n    </div>\r\n</html>");
+},{"ejs":11}],3:[function(require,module,exports){
 var Templates = require('../Templates');
 
-
-var Cart = [];
+var Cart;
+function initialiseCart() {
+    if (localStorage.getItem('Cart') != null) {
+        Cart = JSON.parse(localStorage.getItem('Cart'));
+    }
+    else
+        Cart = [];
+    updateCart();
+}
+    
 
 var $cart = $('#cart');
 
@@ -250,6 +112,8 @@ function addToCart(box){
             quantity:1
         });
     }
+
+    localStorage.setItem('Cart', JSON.stringify(Cart));
 
     updateCart();
 
@@ -312,20 +176,24 @@ function updateCart() {
     Cart.forEach(showOnePizzaInCart);
 }
 
+function getCart() {
+    return Cart;
+}
 
 
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
+exports.initialiseCart=initialiseCart;
 
-exports.Cart=Cart;
+exports.getCart=getCart;
 
-},{"../Templates":3}],5:[function(require,module,exports){
+},{"../Templates":2}],4:[function(require,module,exports){
 
 
 var Templates = require('../Templates');
 var BoxCart = require('./BoxCart');
 const API = require("../API");
-var Pizza_List = API.getBoxList(initBoxList);
+
 
 
 
@@ -335,12 +203,49 @@ function initialiseMenu() {
     else
     console.log('not now');
     API.getBoxList(initBoxList);
+    API.getItemList(iniItemList);
+}
+
+
+function iniItemList(error, data) {
+    if (error == null) {
+        item_List = data;
+        showItemList(item_List);
+
+    }
+}
+
+function showItemList(list) {
+
+
+    function nullify(item) {
+        $('.' + item.class).html('');
+    }
+    list.forEach(nullify);
+
+
+    function showOneItem(item) {
+        var html_code = Templates.singleItem({ singleItem: item });
+
+        var $node = $(html_code);
+
+        $node.find(".buy").click(function () {
+            BoxCart.addToCart(item);
+        });
+      
+
+
+        $('.'+item.class).append($node);
+    }
+
+    list.forEach(showOneItem);
 }
 
 function initBoxList(error, data) {
+    
     if (error == null) {
-        Pizza_List = data;
-        showBoxList(Pizza_List);
+        var box_list = data;
+        showBoxList(box_list);
 
     }
 }
@@ -361,6 +266,18 @@ function showBoxList(list) {
         $node.find(".buy").click(function () {
             BoxCart.addToCart(box);
         });
+
+
+        $node.find('.details').click(function () {
+          
+            if (document.getElementById(box.id).style.display=='block')
+            var opened=true;
+            $('#' + box.id).css('display', 'none');
+            if(!opened){
+            opened=true;
+            $('#' + box.id).css('display','block');
+            }
+        })
        
 
         $('#'+box.class).append($node);
@@ -374,7 +291,119 @@ function showBoxList(list) {
 
 
 exports.initialiseMenu=initialiseMenu;
-},{"../API":1,"../Templates":3,"./BoxCart":4}],6:[function(require,module,exports){
+},{"../API":1,"../Templates":2,"./BoxCart":3}],5:[function(require,module,exports){
+const API = require('../API');
+var BoxCart = require('./BoxCart');
+
+function sendToBack(error, data) {
+    let receipt_details = data;
+    console.log('receipt_details');
+    console.log(receipt_details);
+    if (!error) {
+        LiqPayCheckout.init({
+            data: receipt_details.data,
+            signature: receipt_details.signature,
+            embedTo: "#liqpay",
+            mode: "popup"	//	embed	||	popup
+        }).on("liqpay.callback", function (data) {
+            console.log(data.status);
+            console.log(data);
+        }).on("liqpay.ready", function (data) {
+            //	ready
+        }).on("liqpay.close", function (data) {
+            //	close
+        });
+    }
+    else {
+        console.log('some error');
+    }
+}
+
+
+$('#submit-order').click(function () {
+    var cart=BoxCart.getCart();
+    var phoneNumber = $('#PhoneField').val();
+    var address = $('#CityField').val() + '№' + $('#numberField').val();
+    var name = $('#NameField').val();
+    var order_info = {
+        phoneNumber: phoneNumber,
+        name: name,
+        address: address,
+        cart: cart
+    }
+   
+    API.createOrder(order_info, sendToBack);
+})
+},{"../API":1,"./BoxCart":3}],6:[function(require,module,exports){
+const API = require('../API');
+var Templates = require('../Templates');
+var comment={};
+var comment_list;
+function sendToBack(error, data) {
+    if (!error) {
+        console.log('CommentData')
+        console.log(data);
+      
+    }
+    else {
+        console.log('error');
+    }
+}
+
+function initCommentList(error, data) {
+ 
+    if (error == null) {
+        var comment_list = data;
+        showCommentList(comment_list);
+
+    }
+    else{
+        console.log(error);
+    }
+}
+
+function showCommentList(list){
+
+   console.log(list);
+
+    function showOneComment(Comment) {
+        var html_code = Templates.CommentItem({ comment: Comment });
+
+        var $node = $(html_code);
+
+
+        $('#CommentsSection').append($node);
+    }
+
+    list.forEach(showOneComment);
+
+}
+
+
+
+
+$('#sendCommnet').click(function () {
+
+    var commentText = $('#commentInput').val();
+    var user = JSON.parse(sessionStorage.getItem('user'));
+    comment.email = user.email;
+    comment.commentText=commentText;
+    
+    API.createComment(comment, sendToBack);
+    window.location.href = 'http://localhost:3050';
+
+});
+
+function initialiseComments() {
+    if (sessionStorage.getItem('user') == null)
+        document.getElementById('sendCommnet').disabled=true;
+    API.getCommentsList(initCommentList);
+}
+
+exports.initialiseComments=initialiseComments;
+
+
+},{"../API":1,"../Templates":2}],7:[function(require,module,exports){
 var API = require('../API');
 var exist=false;
 
@@ -416,25 +445,26 @@ $('#sendUserData').on('click', function () {
 });
 
 
-},{"../API":1}],7:[function(require,module,exports){
+},{"../API":1}],8:[function(require,module,exports){
 $(function () {
 
-
+    var comment=require('./comment/comment');
     var loginPage = require('./login/login');
     var signUpPage = require('./signUp/signUp');
     //This code will execute when the page is ready
     var BoxesChoice = require('./boxes/BoxesChoice');
-    //var PizzaCart = require('./pizza/PizzaCart');
-    var Box_List = require('./Box_List');
-
-    //PizzaCart.initialiseCart();
+    var order =require('./boxes/order');
+    var BoxCart = require('./boxes/BoxCart')
+  
+    BoxCart.initialiseCart();
     BoxesChoice.initialiseMenu();
+    comment.initialiseComments();
 
 
   
 
 });
-},{"./Box_List":2,"./boxes/BoxesChoice":5,"./login/login":6,"./signUp/signUp":8}],8:[function(require,module,exports){
+},{"./boxes/BoxCart":3,"./boxes/BoxesChoice":4,"./boxes/order":5,"./comment/comment":6,"./login/login":7,"./signUp/signUp":9}],9:[function(require,module,exports){
 const API = require('../API');
 var email;
 var login;
@@ -485,7 +515,7 @@ $('#signUp').click(function () {
 function sendToBack(error, data) {
     if (!error) {
         console.log(data);
-        window.location.href = 'http://localhost:3050/signUpPage.html';
+        
     }
     else {
         console.log('error');
@@ -502,9 +532,9 @@ $('#VerificationButton').click(function () {
 });
 
 
-},{"../API":1}],9:[function(require,module,exports){
+},{"../API":1}],10:[function(require,module,exports){
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1486,7 +1516,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":12,"./utils":11,"fs":9,"path":13}],11:[function(require,module,exports){
+},{"../package.json":13,"./utils":12,"fs":10,"path":14}],12:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1655,7 +1685,7 @@ exports.cache = {
   }
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
@@ -1694,7 +1724,7 @@ module.exports={
   }
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (process){
 // .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
 // backported and transplited with Babel, with backwards-compat fixes
@@ -2000,7 +2030,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":14}],14:[function(require,module,exports){
+},{"_process":15}],15:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2186,4 +2216,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[7]);
+},{}]},{},[8]);

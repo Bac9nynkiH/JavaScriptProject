@@ -48,7 +48,7 @@ $('#signUp').click(function () {
 function sendToBack(error, data) {
     if (!error) {
         console.log(data);
-        window.location.href = 'http://localhost:3050/signUpPage.html';
+        
     }
     else {
         console.log('error');

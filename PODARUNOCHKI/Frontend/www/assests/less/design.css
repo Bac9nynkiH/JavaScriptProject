@@ -109,7 +109,7 @@ figcaption {
   outline: none;
   background-color: #54655b;
 }
-.LetMarketingGrowYourBusiness {
+.mainPageImage {
   width: 100%;
   margin-top: 100px;
   height: 70vh;
@@ -118,10 +118,20 @@ figcaption {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+.mainImage {
+  width: 100%;
+  margin-top: 100px;
+  height: 70vh;
+  background-image: url('backBoxes4.jpeg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 .clearfix {
   display: none;
 }
-.LOGO {
+.LOGO,
+.mainImageDiv {
   padding-top: 40px;
 }
 .textStory {
@@ -137,6 +147,26 @@ figcaption {
   color: #78192f;
   font-size: 3vw;
   font-weight: bold;
+}
+.indGiftText,
+.createText {
+  vertical-align: middle;
+  margin-bottom: -0.5vw;
+  margin-top: 80px;
+  text-align: center;
+  color: white;
+  font-size: 5vw;
+  font-weight: bold;
+}
+.createText {
+  margin-top: 15px;
+  font-size: 2vw;
+}
+.howItWorks {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #000000;
 }
 .picStory {
   width: 50%;
@@ -459,6 +489,10 @@ td {
   font-size: 14px;
   margin: 5px 5px 5px 60px;
 }
+.punkts {
+  font-size: 19px;
+  font-family: 'FuturaPT', Arial, sans-serif;
+}
 .foot {
   text-align: center;
   font-size: 12px;
@@ -473,5 +507,10 @@ td {
   width: 60%;
 }
 #VerificationArea {
+  display: none;
+}
+.DetailsText {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
   display: none;
 }

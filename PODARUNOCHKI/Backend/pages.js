@@ -18,3 +18,9 @@ exports.loginPage = function (req, res) {
         pageTitle: 'login'
     });
 };
+
+exports.createBox = function (req, res) {
+    res.render('createBox', {
+        pageTitle: 'створити бокс'
+    });
+};
